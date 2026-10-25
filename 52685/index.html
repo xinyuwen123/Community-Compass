@@ -1,0 +1,292 @@
+<!doctype html> <!-- Use the HTML5 document standard. -->
+<html lang="en"> <!-- Identify the page language as English. -->
+<head>
+  <meta charset="UTF-8"> <!-- Support letters and symbols. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Fit mobile screens. -->
+  <title>Community Compass | Xinyu Wen</title> <!-- Set the browser tab title. -->
+
+  <!-- PART 1: CSS controls the layout, black text, white backgrounds and warm orange borders. -->
+  <style>
+    * {
+      box-sizing: border-box; /* Include padding and borders in an element's width. */
+    }
+    body {
+      margin: 16px; /* Leave space outside the page. */
+      background: white; /* Use a white page background. */
+      color: black; /* Use black text. */
+      font-family: Arial, sans-serif; /* Use a simple, readable font. */
+      line-height: 1.5; /* Leave space between lines of text. */
+    }
+    main {
+      max-width: 1100px; /* Limit the page width on large screens. */
+      margin: auto; /* Centre the page horizontally. */
+      border: 1px solid #C97842; /* Draw a thin warm orange page border using a hexadecimal colour. */
+    }
+    .page-header, .page-footer {
+      padding: 20px; /* Leave space inside the header and footer. */
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px; /* Remove the top margin and leave space below headings. */
+    }
+    h1 {
+      font-size: 30px; /* Set the main heading size. */
+    }
+    h2 {
+      font-size: 22px; /* Set the section heading size. */
+    }
+    h3 {
+      font-size: 17px; /* Set the information card heading size. */
+    }
+    a {
+      color: black; /* Keep links black, including after visiting them. */
+    }
+    figure {
+      margin: 0; /* Remove the browser's default space around the photograph. */
+      border-top: 1px solid #C97842; /* Separate the photograph from the header with a warm orange line. */
+    }
+    figure img {
+      display: block; /* Remove the small gap below an inline image. */
+      width: 100%; /* Fill the width of the page. */
+      height: 280px; /* Give the photograph a fixed display height. */
+      object-fit: cover; /* Fill the photo area without stretching the image. */
+      object-position: center 25%; /* Keep the upper part of the photograph in view. */
+    }
+    figcaption {
+      padding: 8px 20px; /* Add space around the photo caption. */
+      font-size: 13px; /* Make the caption smaller than the main text. */
+    }
+    .layout {
+      display: grid; /* Arrange the menu and information board in columns. */
+      grid-template-columns: 220px minmax(0, 1fr); /* Fix the menu width; let the board fill the rest. */
+      border-top: 1px solid #C97842; /* Separate the main area from the photograph with a warm orange line. */
+    }
+    aside {
+      padding: 16px; /* Leave space inside the menu column. */
+      border-right: 1px solid #C97842; /* Draw the Cornell-style vertical divider in warm orange. */
+    }
+    .notes-column {
+      padding: 20px; /* Leave space around the information board. */
+      min-width: 0; /* Allow this grid column to shrink on narrow screens. */
+    }
+    button, input, textarea {
+      font: inherit; /* Use the same font as the page. */
+      color: black; /* Use black text in controls. */
+      background: white; /* Use white backgrounds in controls. */
+      border: 1px solid #C97842; /* Give controls a simple warm orange border. */
+      padding: 8px; /* Leave space inside each control. */
+    }
+    button {
+      cursor: pointer; /* Show a hand cursor on clickable buttons. */
+    }
+    .menu-box button {
+      display: block; /* Put each menu button on a separate line. */
+      width: 100%; /* Fill the menu width. */
+      margin-bottom: 8px; /* Separate neighbouring buttons. */
+      text-align: left; /* Align menu labels to the left. */
+    }
+    .menu-box button[aria-current="true"] {
+      background: black; /* Mark the selected menu option with a black background. */
+      color: white; /* Keep the selected label readable. */
+    }
+    :focus-visible {
+      outline: 2px solid #C97842; /* Show keyboard users the focused control with a warm orange outline. */
+      outline-offset: 3px; /* Separate the focus outline from the control border. */
+    }
+    .information-grid {
+      display: grid; /* Arrange the information cards in a grid. */
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* Create two equally sized columns. */
+      gap: 12px; /* Leave space between cards. */
+    }
+    .information-box {
+      border: 1px solid #C97842; /* Outline each information card in warm orange. */
+      padding: 14px; /* Leave space between the card content and its border. */
+      min-height: 170px; /* Give empty cards enough height to remain visible. */
+    }
+    .review-section, .page-footer {
+      border-top: 1px solid #C97842; /* Separate the form and footer from earlier content with warm orange lines. */
+    }
+    .review-section {
+      margin-top: 20px; /* Leave space above the form. */
+      padding-top: 20px; /* Leave space below the form's top border. */
+    }
+    label {
+      display: block; /* Place each form label on its own line. */
+      margin-bottom: 12px; /* Separate the form fields. */
+    }
+    input, textarea {
+      display: block; /* Place the control below its label. */
+      width: 100%; /* Fill the available form width. */
+      margin-top: 4px; /* Leave a small gap below the label text. */
+    }
+    textarea {
+      resize: vertical; /* Allow height changes without widening the form. */
+    }
+    [hidden] {
+      display: none !important; /* Hide filtered cards and the inactive form. */
+    }
+    @media (max-width: 700px) { /* Apply these changes on narrow screens. */
+      .layout, .information-grid {
+        grid-template-columns: 1fr; /* Stack the menu, board and cards in one column. */
+      }
+      aside {
+        border-right: 0; /* Remove the divider that is no longer between columns. */
+        border-bottom: 1px solid #C97842; /* Separate the stacked menu and board with a warm orange line. */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PART 2: HTML provides the headings, menus, information cards and form. -->
+  <main>
+    <header class="page-header">
+      <h1>Community Compass</h1>
+      <p>Small help, close to home.</p>
+      <p>Ultimo and nearby neighbourhoods · Free local prototype</p>
+      <a href="#information-board">Skip to community information</a> <!-- Jump to the main board. -->
+    </header>
+
+    <!-- Keep this image file in the same folder as this HTML file; its original colours are preserved. -->
+    <figure>
+      <img src="ultimo-community(1).jpeg" alt="An adult and two children making crafts at a community event.">
+      <figcaption>Community life in Ultimo. Photo source is credited below.</figcaption>
+    </figure>
+
+    <div class="layout"> <!-- Group the left menu and the right information board. -->
+      <aside>
+        <h2>CUES / OPTIONS</h2>
+        <!-- data-filter stores the category used by JavaScript; aria-current marks the active option. -->
+        <nav class="menu-box" aria-label="Information categories">
+          <button type="button" data-filter="all" aria-current="true">All approved information</button>
+          <button type="button" data-filter="food">Food relief</button>
+          <button type="button" id="publish-button">Publish information</button>
+          <button type="button" data-filter="lost">Lost and found</button>
+          <button type="button" data-filter="work">Part-time / full-time</button>
+          <button type="button" data-filter="community">Ultimo community</button>
+        </nav>
+        <p><small>The local form allows typing only. Submit does not send or save a listing.</small></p>
+      </aside>
+
+      <section class="notes-column" id="information-board" tabindex="-1"> <!-- tabindex allows the skip link to focus this section. -->
+        <h2 id="board-title">Local information</h2> <!-- JavaScript updates this heading. -->
+        <noscript>Enable JavaScript to use the category filters and form.</noscript>
+        <!-- data-category identifies each card. The shared class connects cards to CSS and JavaScript. -->
+        <div class="information-grid" aria-live="polite"> <!-- Announce updates without interrupting a screen reader. -->
+          <article class="information-box" data-category="lost">
+            <h3>Lost &amp; Found</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+          <article class="information-box" data-category="exchange">
+            <h3>Second-hand Exchange</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+          <article class="information-box" data-category="rental">
+            <h3>Direct Rental Listings</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+          <article class="information-box" data-category="food">
+            <h3>Food Relief</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+          <article class="information-box" data-category="work">
+            <h3>Part-time &amp; Full-time</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+          <article class="information-box" data-category="community">
+            <h3>Ultimo Community</h3>
+            <p>No approved information at present.</p>
+            <small>AREA: ULTIMO</small>
+          </article>
+        </div>
+
+        <section class="review-section" id="review-form" hidden> <!-- Keep the form hidden until Publish information is clicked. -->
+          <h2>Submit information for review</h2>
+          <p>Please do not include private information.</p>
+          <form id="listing-form" novalidate> <!-- Disable browser validation; every editable field is optional. -->
+            <label>Information category
+              <input type="text" name="category" placeholder="Type a category"> <!-- Allow typing instead of selecting from a list. -->
+            </label>
+            <label>General area
+              <input type="text" name="area" value="Ultimo" readonly> <!-- Show Ultimo without allowing changes. -->
+            </label>
+            <label>Listing title
+              <input type="text" name="title" placeholder="Short and factual title">
+            </label>
+            <label>Information for the moderator
+              <textarea name="details" rows="5" placeholder="Describe the information."></textarea> <!-- Allow several lines of text. -->
+            </label>
+            <button type="submit">Submit application for review</button> <!-- JavaScript cancels submission below. -->
+          </form>
+        </section>
+      </section>
+    </div>
+
+    <footer class="page-footer">
+      <p>Proposed moderator: Xinyu Wen.</p>
+      <p>This program does not offer publishing or reviewing services because it is not connected to an online publishing and review system.</p>
+      <small>Visual credits: Header photo source:
+        <a href="https://www.eventbrite.com.au/e/ultimo-community-centre-30th-anniversary-open-day-tickets-1988611045168">Ultimo Community Centre 30th Anniversary Open Day — Eventbrite</a>.
+      </small>
+    </footer>
+  </main>
+
+  <!-- PART 3: JavaScript filters cards, opens the form and prevents real submission. -->
+  <script>
+    // querySelectorAll finds every matching element; const gives the selection a reusable name.
+    const cards = document.querySelectorAll(".information-box");
+    const filterButtons = document.querySelectorAll("[data-filter]");
+    const menuButtons = document.querySelectorAll(".menu-box button");
+    // getElementById finds the single element with that id.
+    const boardTitle = document.getElementById("board-title");
+    const reviewSection = document.getElementById("review-form");
+    const publishButton = document.getElementById("publish-button");
+    const listingForm = document.getElementById("listing-form");
+
+    // Mark one menu button as current; CSS makes that button black with white text.
+    function selectButton(selectedButton) {
+      menuButtons.forEach(function (button) { // Visit every menu button.
+        button.removeAttribute("aria-current"); // Clear the previous selection.
+      });
+      selectedButton.setAttribute("aria-current", "true"); // Mark the chosen button.
+    }
+
+    // Show cards for one category. Selecting "all" shows every card again.
+    function showCategory(category, selectedButton) {
+      cards.forEach(function (card) { // Check each card once.
+        // === compares values; || means OR; dataset.category reads data-category in HTML.
+        if (category === "all" || card.dataset.category === category) {
+          card.hidden = false; // Show matching cards, or every card when "all" is selected.
+        } else {
+          card.hidden = true; // Hide cards from other categories.
+        }
+      });
+      boardTitle.textContent = selectedButton.textContent; // Copy the selected menu label into the heading.
+      reviewSection.hidden = true; // Close the form when browsing categories.
+      selectButton(selectedButton); // Update the selected menu option.
+    }
+
+    // Give every category button a click handler; a handler runs after the user's action.
+    filterButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showCategory(button.dataset.filter, button); // Read data-filter and call the filtering function.
+      });
+    });
+
+    // Open the optional typing form on the same page.
+    publishButton.addEventListener("click", function () {
+      reviewSection.hidden = false; // Reveal the form.
+      selectButton(publishButton); // Highlight the Publish information button.
+      listingForm.elements.category.focus(); // Move keyboard focus to the first field.
+    });
+
+    // Cancel submission from the button or Enter key. Keep the page and typed text unchanged.
+    listingForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent navigation; do not send, save, reset or publish anything.
+    });
+  </script>
+</body>
+</html>
